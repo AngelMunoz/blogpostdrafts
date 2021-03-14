@@ -23,7 +23,7 @@ let content =
 task {
     let! response =
         httpAsync {
-            POST "https://dev.to/tunaxor/doing-some-io-in-f-4agg"
+            POST "https://jsonplaceholder.typicode.com/posts"
             body
             json content
         }
