@@ -8,9 +8,10 @@ open FsHttp.DslCE
 open FsHttp.Response
 
 task {
+    use file = File.OpenWrite("./response.html")
     let! response = httpAsync { GET "https://dev.to/tunaxor/doing-some-io-in-f-4agg" }
-    let! content = response |> toTextAsync
-    do! File.WriteAllTextAsync("./response.html", content)
+    let! content = response |> toStreamAsync
+    do! content.CopyToAsync(file)
 }
 |> Async.AwaitTask
 // we run synchronously
